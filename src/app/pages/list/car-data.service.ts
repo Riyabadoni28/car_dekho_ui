@@ -13,7 +13,7 @@ export interface CarApiResponse {
   providedIn: 'root'
 })
 export class CarDataService {
-  private readonly baseUrl = 'https://car-dekho-api.vercel.app/api/cars';
+  private readonly baseUrl = 'https://car-dekho-api-1.vercel.app/api/cars';
 
   constructor(private readonly http: HttpClient) {}
 
