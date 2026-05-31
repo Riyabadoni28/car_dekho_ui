@@ -1,0 +1,86 @@
+{
+  "filters": {
+    "makes": ["Toyota", "Hyundai", "Maruti Suzuki", "Kia", "Mahindra"],
+    "models": ["Fortuner", "Creta", "Swift", "Seltos", "Thar"],
+    "variants": ["Base", "Mid", "Premium", "Sport", "Top"],
+    "prices": ["< 10L", "10L - 20L", "20L - 30L", "30L - 40L", "> 40L"],
+    "specs": ["Petrol", "Diesel", "Hybrid", "Electric"],
+    "mileage": ["10-15 kmpl", "15-20 kmpl", "20-25 kmpl", "25+ kmpl"],
+    "safetyRating": ["3 Star", "4 Star", "5 Star"],
+    "userReviews": ["Excellent", "Good", "Average", "Below Average"]
+  },
+  "cars": [
+    {
+      "id": 1,
+      "make": "Toyota",
+      "model": "Fortuner",
+      "variant": "Premium",
+      "price": "35L",
+      "specs": "Diesel",
+      "mileage": "12 kmpl",
+      "safetyRating": "5 Star",
+      "userReview": "Excellent",
+      "images": ["https://via.placeholder.com/520x320?text=Fortuner"]
+    },
+    {
+      "id": 2,
+      "make": "Hyundai",
+      "model": "Creta",
+      "variant": "Sport",
+      "price": "18L",
+      "specs": "Petrol",
+      "mileage": "16 kmpl",
+      "safetyRating": "4 Star",
+      "userReview": "Good",
+      "images": ["https://via.placeholder.com/520x320?text=Creta"]
+    },
+    {
+      "id": 3,
+      "make": "Maruti Suzuki",
+      "model": "Swift",
+      "variant": "Base",
+      "price": "8L",
+      "specs": "Petrol",
+      "mileage": "22 kmpl",
+      "safetyRating": "4 Star",
+      "userReview": "Good",
+      "images": ["https://via.placeholder.com/520x320?text=Swift"]
+    },
+    {
+      "id": 4,
+      "make": "Kia",
+      "model": "Seltos",
+      "variant": "Top",
+      "price": "22L",
+      "specs": "Hybrid",
+      "mileage": "18 kmpl",
+      "safetyRating": "5 Star",
+      "userReview": "Excellent",
+      "images": ["https://via.placeholder.com/520x320?text=Seltos"]
+    },
+    {
+      "id": 5,
+      "make": "Mahindra",
+      "model": "Thar",
+      "variant": "Mid",
+      "price": "15L",
+      "specs": "Diesel",
+      "mileage": "14 kmpl",
+      "safetyRating": "4 Star",
+      "userReview": "Average",
+      "images": ["https://via.placeholder.com/520x320?text=Thar"]
+    },
+    {
+      "id": 6,
+      "make": "Toyota",
+      "model": "Fortuner",
+      "variant": "Sport",
+      "price": "40L",
+      "specs": "Diesel",
+      "mileage": "11 kmpl",
+      "safetyRating": "5 Star",
+      "userReview": "Good",
+      "images": ["https://via.placeholder.com/520x320?text=Fortuner+Sport"]
+    }
+  ]
+}

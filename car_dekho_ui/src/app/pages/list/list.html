@@ -1,0 +1,137 @@
+<section class="list-page">
+  <div class="filter-panel">
+    <h2>Filters</h2>
+    <div class="filter-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Make</mat-label>
+        <mat-select [value]="selectedFilters().make" (selectionChange)="setFilter('make', $event.value)">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let make of filterOptions().makes" [value]="make">{{ make }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Model</mat-label>
+        <mat-select [value]="selectedFilters().model" (selectionChange)="setFilter('model', $event.value)">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let model of filterOptions().models" [value]="model">{{ model }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Variant</mat-label>
+        <mat-select [value]="selectedFilters().variant" (selectionChange)="setFilter('variant', $event.value)">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let variant of filterOptions().variants" [value]="variant">{{ variant }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <mat-select [value]="selectedFilters().price" (selectionChange)="setFilter('price', $event.value)">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let price of filterOptions().prices" [value]="price">{{ price }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Specs</mat-label>
+        <mat-select [value]="selectedFilters().specs" (selectionChange)="setFilter('specs', $event.value)">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let spec of filterOptions().specs" [value]="spec">{{ spec }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mileage</mat-label>
+        <mat-select [value]="selectedFilters().mileage" (selectionChange)="setFilter('mileage', $event.value)">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let mileage of filterOptions().mileage" [value]="mileage">{{ mileage }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Safety Rating</mat-label>
+        <mat-select [value]="selectedFilters().safetyRating" (selectionChange)="setFilter('safetyRating', $event.value)">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let rating of filterOptions().safetyRating" [value]="rating">{{ rating }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>User Review</mat-label>
+        <mat-select [value]="selectedFilters().userReview" (selectionChange)="setFilter('userReview', $event.value)">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let review of filterOptions().userReviews" [value]="review">{{ review }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="filter-actions">
+      <button mat-stroked-button color="primary" type="button" (click)="applyFilters()">Apply Filters</button>
+      <button mat-button type="button" (click)="clearFilters()">Clear</button>
+    </div>
+
+    <!-- <div class="applied-filters" *ngIf="appliedFilters.length > 0">
+      <span>Applied Filters:</span>
+      <span class="chip" *ngFor="let filter of appliedFilters">
+        {{ filter.label }}: {{ filter.value }}
+        <button mat-icon-button class="chip-close" type="button" aria-label="Remove {{ filter.label }} filter" (click)="removeFilter(filter.field)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </span>
+    </div> -->
+  </div>
+
+  <div class="results-panel">
+    <div class="results-header">
+      <div>
+        <h2>Cars</h2>
+        <p>{{ totalCars() }} result{{ totalCars() === 1 ? '' : 's' }}</p>
+      </div>
+      <div class="pagination-controls">
+        <button mat-icon-button aria-label="Previous page" (click)="previousPage()" [disabled]="pageIndex() === 0 || loading()">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span>Page {{ pageIndex() + 1 }}</span>
+        <button mat-icon-button aria-label="Next page" (click)="nextPage()" [disabled]="pageIndex() >= ((totalCars() - 1) / pageSize) || loading()">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="loading-state" *ngIf="loading()">
+      <mat-spinner diameter="48"></mat-spinner>
+      <span>Loading cars…</span>
+    </div>
+
+    <div class="card-grid" *ngIf="!loading()">
+      <mat-card *ngFor="let car of cars()" class="car-card">
+        <div class="card-layout">
+          <img class="card-image" [src]="car.images[0]" [alt]="car.make + ' ' + car.model" />
+          <div class="card-details">
+            <div>
+              <div class="card-header">
+                <div>
+                  <h3>{{ car.make }} {{ car.model }}</h3>
+                  <p class="variant">{{ car.variant }}</p>
+                </div>
+                <div class="price">{{ car.price }}</div>
+              </div>
+              <div class="car-stats">
+                <span>{{ car.specs }}</span>
+                <span>{{ car.mileage }}</span>
+                <span>{{ car.safetyRating }}</span>
+                <span>{{ car.userReview }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="no-results" *ngIf="!loading() && cars().length === 0">
+      No cars match the selected filters.
+    </div>
+  </div>
+</section>
