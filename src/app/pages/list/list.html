@@ -51,7 +51,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Safety Rating</mat-label>
+        <mat-label>Safety Rating (Stars)</mat-label>
         <mat-select [value]="selectedFilters().safetyRating" (selectionChange)="setFilter('safetyRating', $event.value)">
           <mat-option [value]="null">All</mat-option>
           <mat-option *ngFor="let rating of filterOptions().safetyRating" [value]="rating">{{ rating }}</mat-option>
@@ -108,21 +108,21 @@
     <div class="card-grid" *ngIf="!loading()">
       <mat-card *ngFor="let car of cars()" class="car-card">
         <div class="card-layout">
-          <img class="card-image" [src]="car.images[0]" [alt]="car.make + ' ' + car.model" />
+          <img class="card-image" [src]="car?.images?.[0]" [alt]="car.make + ' ' + car.model" />
           <div class="card-details">
             <div>
               <div class="card-header">
                 <div>
-                  <h3>{{ car.make }} {{ car.model }}</h3>
-                  <p class="variant">{{ car.variant }}</p>
+                  <h3>Make/Model: {{ car.make }} {{ car.model }}</h3>
+                  <p class="variant">Variant: {{ car.variant }}</p>
                 </div>
                 <div class="price">{{ car.price }}</div>
               </div>
               <div class="car-stats">
-                <span>{{ car.specs }}</span>
-                <span>{{ car.mileage }}</span>
-                <span>{{ car.safetyRating }}</span>
-                <span>{{ car.userReview }}</span>
+                <!-- <span>{{ car.specs.engine }}  {{ car.specs.fuel }}</span> -->
+                <span>Mileage : {{ car.mileage }}</span>
+                <span>Safety Rating : {{ car.safety_rating }}</span>
+                <span>User Reviews : {{ car.user_reviews.length }}</span>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
       </mat-card>
     </div>
 
-    <div class="no-results" *ngIf="!loading() && cars().length === 0">
+    <div class="no-results" *ngIf="!loading() && (cars()?.length ?? 0) === 0">
       No cars match the selected filters.
     </div>
   </div>

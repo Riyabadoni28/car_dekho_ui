@@ -6,7 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { CarCard, CarDataService, CarFilters, FilterOptions } from './car-data.service';
+import { CarCard, CarFilters, FilterOptions } from './car.model';
+import { CarDataService } from './car-data.service';
 
 @Component({
   selector: 'app-list',
@@ -36,16 +37,16 @@ export class List {
     userReviews: []
   });
 
-  readonly selectedFilters = signal<CarFilters>({
-    make: null,
-    model: null,
-    variant: null,
-    price: null,
-    specs: null,
-    mileage: null,
-    safetyRating: null,
-    userReview: null
-  });
+readonly selectedFilters = signal<CarFilters>({
+  make: null,
+  model: null,
+  variant: null,
+  price: null,
+  specs: null,
+  mileage: null,
+  safetyRating: null,
+  userReview: null
+});
 
   readonly cars = signal<CarCard[]>([]);
   readonly loading = signal(false);
@@ -61,17 +62,25 @@ export class List {
     this.carData.getFilterOptions().subscribe((options) => this.filterOptions.set(options));
   }
 
-  loadCars(): void {
-    this.loading.set(true);
-    this.carData
-      .getCars(this.selectedFilters(), this.pageIndex(), this.pageSize)
-      .subscribe((response) => {
-        this.cars.set(response.cars);
-        console.log('Loaded cars:', response.cars);
-        this.totalCars.set(response.total);
+loadCars(): void {
+  this.loading.set(true);
+
+  this.carData
+    .getCars(this.selectedFilters(), this.pageIndex(), this.pageSize)
+    .subscribe({
+      next: (response) => {
+        console.log('data',response)
+        this.cars.set(response?.data ?? []);
+        this.totalCars.set(response?.total ?? 0);
         this.loading.set(false);
-      });
-  }
+      },
+      error: () => {
+        this.cars.set([]);
+        this.totalCars.set(0);
+        this.loading.set(false);
+      }
+    });
+}
 
   applyFilters(): void {
     this.pageIndex.set(0);
