@@ -57,3 +57,17 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+<!-- 
+What did you build and why? What did you deliberately cut?
+I build simple list page which show data based on filters which is most important to user while its buy car. 
+
+What’s your tech stack and why did you pick it?
+I pick angular for this because i am very much famility with this and its give most of think pre-build so easy to fast implementation for me.
+
+What did you delegate to AI tools vs. do manually? Where did the tools help most? Where did they get in the way?
+while i use ai tool its helpful me for fast write code if maually  work it take lot of time. but AI is also need for manually check all code.
+
+If you had another 4 hours, what would you add?
+I am make page very interactive give search funcationality for good filters good ui.
+ -->
